@@ -1,0 +1,5 @@
+/build/
+/config/
+/dist/
+/src/libs/browser-md5-file.min.js
+/*.js
