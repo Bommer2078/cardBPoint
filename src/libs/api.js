@@ -19,6 +19,7 @@ const api = {
 	delVenueUser    : `${val}/venue/user/del`, // 场馆删除商户
 	venueUserList   : `${val}/venue/user/list`, // 场馆商户
 	venueSaveUser   : `${val}/venue/user/save`, // 新增商户
+	getVenueOrder   : `${val}/order/admin_list`, // 商户统计
 
 	// 普通用户
 	getCommenUserList: `${val}/user/list`,
@@ -43,7 +44,7 @@ const api = {
 	getDictionaryItem : `${val}/dictionaryItem/listByDictionaryId`,
 
 	// 订单
-	getOrderList   : `${val}/order/listForAdmin`,	// 根据条件分页查找订单
+	getOrderList   : `${val}/order/list`,	// 根据条件分页查找订单
 	deleRecode     : `${val}/verify`,	// 根据条件分页查找订单
 	ship           : `${val}/order/ship`,
 	notice         : `${val}/notice/list`,

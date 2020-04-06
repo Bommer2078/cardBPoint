@@ -165,8 +165,8 @@ export default {
 			}
 
 			this.$http.get(this.$api.getOrderList, {params}).then(({data}) => {
-				if (data.code === '0') {
-					this.tableDateArr = data.data.list
+				if (data.code === 0) {
+					this.tableDateArr = data.data.data
 					this.total = data.data.total
 				} else {
 					this.$message.error(data.message)

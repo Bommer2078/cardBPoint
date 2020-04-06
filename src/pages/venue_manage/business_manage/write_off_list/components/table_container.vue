@@ -102,14 +102,14 @@ export default {
 		},
 		getwriteOffList () {
 			const params = {
-				page          : this.pageIndex,
-				pageSize      : this.pageSize,
-				username      : this.searchContent,
-				verifyUsername: this.businessName
+				page    : this.pageIndex,
+				pageSize: this.pageSize,
+				search  : this.searchContent,
+				user_id : this.businessName
 			}
 
-			this.$http.get(this.$api.getwriteOffList, {params}).then(({data}) => {
-				if (data.code === '0') {
+			this.$http.post(this.$api.getVenueOrder, params).then(({data}) => {
+				if (data.code === 0) {
 					this.tableDateArr = data.data.list
 					this.total = data.data.total
 				} else {

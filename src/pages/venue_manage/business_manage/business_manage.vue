@@ -56,10 +56,10 @@ export default {
 					...this.$route.query,
 					businessName: username
 				}
-			})
+			}, () => {}, (e) => {})
 			this.current = username
 			this.currentObj = this.businessArr.find((item) => {
-				return item.username === this.current
+				return item.id === this.current
 			})
 		},
 		getBusinessList () {
@@ -76,8 +76,6 @@ export default {
 						let data = res.data.data
 
 						this.businessArr = data.data
-
-						console.log(this.businessArr)
 						if (username) {
 							this.changeBusiness(username)
 						}
