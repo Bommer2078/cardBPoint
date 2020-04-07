@@ -20,10 +20,10 @@
 			<el-table-column
 				align="center"
 				prop="status"
-				label="绑定状态"
+				label="使用状态"
 				min-width="20%">
 				<template slot-scope="scope">
-					<span v-if="scope.row.convert_at">{{`已被${scope.row.nickname}用户绑定`}}</span>
+					<span v-if="scope.row.convert_at">{{`已被${scope.row.nickname}用户使用`}}</span>
 					<span v-else>未绑定</span>
 				</template>
 			</el-table-column>

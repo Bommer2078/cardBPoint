@@ -33,10 +33,17 @@ export default {
 		initCurrentTree () {
 			const temp = sessionStorage.getItem('currentTreeKey')
 
-			this.$nextTick(() => {
-				this.$refs.sideTree.setCurrentKey(temp)
-				this.currentTreeKey = temp
-			})
+			if (temp) {
+				this.$nextTick(() => {
+					this.$refs.sideTree.setCurrentKey(temp)
+					this.currentTreeKey = temp
+				})
+			} else {
+				this.$nextTick(() => {
+					this.$refs.sideTree.setCurrentKey('userManage')
+					this.$router.push('/userManage/userList', () => {})
+				})
+			}
 		},
 		handleNodeClick (res) {
 			sessionStorage.setItem('currentTreeKey', res.nodeKey)

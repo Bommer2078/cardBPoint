@@ -42,8 +42,11 @@ axios.interceptors.response.use(
 		return response
 	},
 	(error) => {
-		console.log('error111', error)
 		loading.close()
+		if (error.message.indexOf('401')) {
+			Message.error('登录已过期，请重新登录')
+			router.replace('/login')
+		}
 		return Promise.reject(error)
 	}
 )

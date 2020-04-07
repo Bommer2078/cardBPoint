@@ -3,7 +3,7 @@
 		<img src="@/assets/images/BusinessMan.svg">
 		<div class="card-info">
 			<span class="name">账号：{{businessObj.nickname}}</span>
-			<i @click="delBusiness">X</i>
+			<i @click="checkDel">X</i>
 		</div>
 	</div>
 </template>
@@ -17,6 +17,13 @@ export default {
 		}
 	},
 	methods: {
+
+		checkDel (obj) {
+			this.$alert('删除后无法恢复，确认删除该商家？', '删除商家', {
+				confirmButtonText: '确定'}).then(() => {
+				this.delBusiness()
+			})
+		},
 		delBusiness () {
 			let params = {
 				id: this.businessObj.id

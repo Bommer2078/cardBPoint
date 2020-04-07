@@ -13,7 +13,7 @@
 			:visible.sync="showSettingBox"
 		>
 			<div class="form-item">
-				<el-select v-model="skuId">
+				<el-select v-model="skuId" placeholder="请选择规格">
 					<el-option v-for="item in skuArr" :key="item.id" :label="item.name" :value="item.id"></el-option>
 				</el-select>
 				<input type="number" class="setting-input" placeholder="请输入批量生产的数量1~1000" v-model.trim="productNum" />
@@ -30,7 +30,7 @@
 			:visible.sync="showSettingBox2"
 		>
 			<div class="form-item">
-				<input type="number" class="setting-input" placeholder="请输入批量生成得序号前12位数字" v-model.trim="excelNum" />
+				<input type="number" class="setting-input" placeholder="请输入批量生成得序号前12位数字" v-model.trim="excelNum" maxlength="12"/>
 			</div>
 			<div slot="footer">
 				<t-button @clickBtn="getExcel">按批次导出</t-button>
@@ -106,6 +106,10 @@ export default {
 		getExcel () {
 			if (!this.excelNum) {
 				this.$message.error('序号不能为空')
+				return
+			}
+			if (String(this.excelNum).length !== 12) {
+				this.$message.error('请输入批量生成得序号前12位数字')
 				return
 			}
 			const params = {
