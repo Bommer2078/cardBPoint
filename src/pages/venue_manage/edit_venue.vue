@@ -466,7 +466,7 @@ export default {
 			if (this.forbidClick) {
 				return
 			}
-			if (this.$loadingImg) {
+			if (this.loadingImg) {
 				this.$message.error('图片正在上传中')
 				return
 			}

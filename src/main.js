@@ -38,7 +38,6 @@ Vue.prototype.$http = axios
 Vue.prototype.$message = Message
 Vue.prototype.$alert = MessageBox.alert
 Vue.prototype.$confirm = MessageBox.confirm
-Vue.prototype.$loadingImg = false
 Vue.mixin(upload)
 Vue.prototype.$EventBus = new Vue()
 Vue.component('vue-ueditor-wrap', VueUeditorWrap)

@@ -11,26 +11,7 @@
 			<div class="form-item">
 				<div class="form-label align-top">封面图<span class="redStar">*</span></div>
 				<div class="form-content cover-img-wrap">
-					<div class="cover-img-box">
-						<img
-							v-if="!img_url"
-							class="cover-img-defalut"
-							src="../../../../assets/images/icon_addpic.svg" >
-						<img
-							v-if="img_url"
-							:src="img_url"
-							class="cover-img" >
-					</div>
-					<div class="cover-img-option">
-						<button class="img-btn">选择图片</button>
-						<p class="img-explain">小于3M，支持jpg、png、jpeg格式</p>
-						<input
-							v-if="!imgLoading"
-							class="file-img"
-							type="file"
-							accept="image/png, image/jpeg, image/jpg"
-							@change="changeCover($event)">
-					</div>
+					<img-group :imgList.sync="imgList"></img-group>
 				</div>
 			</div>
 			<div class="form-item">
@@ -106,9 +87,11 @@
 <script>
 import tButton from '@/components/common/t_button'
 import * as config from '../../../../libs/ue_config'
+import imgGroup from '@/components/img_group'
 export default {
 	data () {
 		return {
+			imgList          : [],
 			ticketName       : '',
 			imgLoading       : false,
 			rich_content     : '',
@@ -129,7 +112,7 @@ export default {
 		}
 	},
 	components: {
-		tButton
+		tButton, imgGroup
 	},
 	watch: {
 		rich_content (nval) {
@@ -201,6 +184,7 @@ export default {
 			})
 		},
 		initTicketInforData (obj) {
+			this.imgList = JSON.parse(obj.banner)
 			this.rich_content = obj.remark
 			this.ticketName = obj.name
 			this.img_url = JSON.parse(obj.banner)[0]
@@ -235,7 +219,7 @@ export default {
 			let tempObj = {
 				remark   : this.rich_content,
 				name     : this.ticketName,
-				banner   : [ this.img_url ],
+				banner   : this.imgList,
 				city_id  : this.locationSelected,
 				sell_type: this.sellType,
 				prompt   : this.prompt,
@@ -264,8 +248,8 @@ export default {
 				this.$message.error('权益卡名称不能为空')
 				return false
 			}
-			if (!this.img_url) {
-				this.$message.error('权益卡图片不能为空')
+			if (this.imgList.length === 0) {
+				this.$message.error('场馆图片不能为空')
 				return false
 			}
 			if (!this.locationSelected) {

@@ -4,10 +4,10 @@
 			<img :src="item" class="img-item" >
 			<img src="/static/img/close.svg" class="del-img" @click="delImg(index)">
 		</div>
-		<div class="img-cover"  v-show="imgListCopy.length < limitNum">
+		<div class="img-cover"  v-show="imgListCopy.length < limitNum"  v-loading="loadingImg">
 			<img src="/static/img/plus_icon.png" class="img-item">
 			<input
-				v-if="!$loadingImg"
+				v-if="!loadingImg"
 				class="file-img"
 				type="file"
 				accept="image/png, image/jpeg, image/jpg"
@@ -44,9 +44,7 @@ export default {
 	},
 	methods: {
 		changeCover (e) {
-			console.log(22222)
 			this.uploadImg(e).then((res) => {
-				console.log(11111, res)
 				this.imgListCopy.push(res)
 				this.$message('上传成功')
 			})
