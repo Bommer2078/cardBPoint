@@ -63,7 +63,7 @@
 					>
 					</el-switch>
 					<span class="split">|</span>
-					<span type="text" class="setting-btn" @click="intoTicketList(scope)">足迹</span>
+					<span type="text" class="setting-btn" @click="intoRecodeList(scope)">足迹</span>
 				</template>
 			</el-table-column>
 		</el-table>
@@ -110,8 +110,8 @@ export default {
 		this.$EventBus.$off('search')
 	},
 	methods: {
-		intoTicketList (val) {
-			this.$router.push(`/userManage/ticketList?name=${val.row.username}`)
+		intoRecodeList (val) {
+			this.$router.push(`/userManage/recodeList?id=${val.row.id}&name=${val.row.nickname}`)
 		},
 		handleChangeState (obj, state) {
 			if (this.forbidClick) {

@@ -4,13 +4,13 @@
 			:data="tableDateArr"
 			style="width: 100%">
 			<el-table-column
-				prop="childCode"
+				prop="venue.name"
 				label="场馆名称"
 				min-width="33%">
 			</el-table-column>
 			<el-table-column
 				align="center"
-				prop="bindingName"
+				prop="create_at"
 				label="入场时间"
 				min-width="33%">
 			</el-table-column>
@@ -55,8 +55,8 @@ export default {
 		this.$EventBus.$off('search')
 	},
 	computed: {
-		currentUsername () {
-			return this.$route.query.name
+		currentUserId () {
+			return this.$route.query.id
 		}
 	},
 	methods: {
@@ -98,17 +98,19 @@ export default {
 		},
 		getRecodeList () {
 			const params = {
-				pageNum : this.pageIndex,
+				page    : this.pageIndex,
 				pageSize: this.pageSize,
-				username: this.currentUsername
+				user_id : this.currentUserId,
+				type    : 0
 			}
 
 			if (this.searchContent) {
 				params.childCode = this.searchContent
 			}
-			this.$http.get(this.$api.getRecodeList, {params}).then(({data}) => {
-				if (data.code === '0') {
-					this.tableDateArr = data.data.list
+			this.$http.post(this.$api.getRecodeList, params).then(({data}) => {
+				if (data.code === 0) {
+					this.tableDateArr = data.data.data
+					console.log(this.tableDateArr)
 					this.total = data.data.total
 				} else {
 					this.$message.error(data.msg)

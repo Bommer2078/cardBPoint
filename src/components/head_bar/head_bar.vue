@@ -19,7 +19,7 @@ export default {
 					tip: '普通用户'
 				} ]
 			}, {
-				path     : '/userManage/ticketList',
+				path     : '/userManage/recodeList',
 				crumbName: [ {
 					tip  : '普通用户',
 					route: '/userManage/userList'

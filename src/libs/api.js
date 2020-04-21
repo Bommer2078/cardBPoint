@@ -25,7 +25,7 @@ const api = {
 	getCommenUserList: `${val}/user/list`,
 	changeUserState  : `${val}/user/change_state`,
 	getwriteOffList  : `${val}/verify/listByVerifyUsername`,
-	getRecodeList    : `${val}/`,
+	getRecodeList    : `${val}/order/list`,
 
 	// 权益卡
 	saveTicket        : `${val}/card/save`,

@@ -1,5 +1,5 @@
 <template>
-	<div class="ticket-manage">
+	<div class="recode-manage">
 		<table-header></table-header>
 		<table-container></table-container>
 	</div>

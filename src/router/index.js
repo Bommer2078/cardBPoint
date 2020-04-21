@@ -6,7 +6,7 @@ import ticketManage from '@/pages/ticket_manage/ticket_manage.vue'
 import editTicket from '@/pages/ticket_manage/edit_ticket.vue'
 import productTicket from '@/pages/ticket_manage/product_ticket/product_ticket.vue'
 import userList from '@/pages/user_manage/user_list/user_list.vue'
-import ticketList from '@/pages/user_manage/ticket_list/ticket_list.vue'
+import recodeList from '@/pages/user_manage/get_recode_list/get_recode_list.vue'
 import locationManage from '@/pages/location_manage/location_manage.vue'
 import orderManage from '@/pages/order_manage/order_manage.vue'
 import venueList from '@/pages/venue_manage/venue_manage.vue'
@@ -35,9 +35,9 @@ export default new Router({
 				name     : 'productTicket',
 				component: productTicket
 			}, {
-				path     : '/userManage/ticketList',
-				name     : 'ticketList',
-				component: ticketList
+				path     : '/userManage/recodeList',
+				name     : 'recodeList',
+				component: recodeList
 			}, {
 				path     : '/userManage/userList',
 				name     : 'userList',

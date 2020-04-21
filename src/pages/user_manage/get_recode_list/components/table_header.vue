@@ -1,5 +1,8 @@
 <template>
 	<div class="table-header">
+		<div class="left-part">
+			{{currentUserName}}的足迹
+		</div>
 	</div>
 </template>
 
@@ -11,15 +14,10 @@ export default {
 		tButton,
 		searchGroup
 	},
-	data () {
-		return {
+	computed: {
+		currentUserName () {
+			return this.$route.query.name
 		}
-	},
-	created () {
-	},
-	destroyed () {
-	},
-	methods: {
 	}
 }
 </script>
@@ -32,8 +30,9 @@ export default {
 		margin-left: 10px;
 	}
 	.left-part {
+		font-size: 14px;
 		display: flex;
-		float: right;
+		float: left;
 		.search-group {
 			margin-left: 10px;
 		}
