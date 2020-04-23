@@ -43,7 +43,9 @@ axios.interceptors.response.use(
 	},
 	(error) => {
 		loading.close()
-		if (error.message.indexOf('401')) {
+		let reg = RegExp(/401/)
+
+		if (error.message.match(reg)) {
 			Message.error('登录已过期，请重新登录')
 			router.replace('/login')
 		}

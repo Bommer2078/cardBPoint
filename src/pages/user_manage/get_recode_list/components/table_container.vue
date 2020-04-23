@@ -6,19 +6,35 @@
 			<el-table-column
 				prop="venue.name"
 				label="场馆名称"
-				min-width="33%">
+				min-width="25%">
 			</el-table-column>
 			<el-table-column
 				align="center"
 				prop="create_at"
 				label="入场时间"
-				min-width="33%">
+				min-width="25%">
 			</el-table-column>
 			<el-table-column
 				align="center"
 				prop="binding"
-				label="使用权益卡名称"
-				min-width="33%">
+				label="使用价格"
+				min-width="25%">
+				<template slot-scope="scope">
+					<div>
+						{{scope.row.price/100}}元
+					</div>
+				</template>>
+			</el-table-column>
+			<el-table-column
+				align="center"
+				prop="create_at"
+				label="支付状态"
+				min-width="25%">
+				<template slot-scope="scope">
+					<div>
+						{{ scope.row.paid_state | payText }}
+					</div>
+				</template>>
 			</el-table-column>
 		</el-table>
 		<el-pagination
@@ -49,10 +65,37 @@ export default {
 	},
 	created () {
 		this.getRecodeList()
-		this.$EventBus.$on('search', this.handleSearch)
+		this.$nextTick(() => {
+			this.$EventBus.$on('search', this.handleSearch)
+		})
 	},
 	destroyed () {
 		this.$EventBus.$off('search')
+	},
+	filters: {
+		// paid_state：支付状态，-1：支付失败，0：未支付，1：预支付，10：已支付
+		payText (val) {
+			let text = ''
+
+			switch (val) {
+				case -1:
+					text = '支付失败'
+					break
+				case 0:
+					text = '未支付'
+					break
+				case 1:
+					text = '预支付'
+					break
+				case 10:
+					text = '已支付'
+					break
+				default:
+					text = '未支付'
+					break
+			}
+			return text
+		}
 	},
 	computed: {
 		currentUserId () {

@@ -4,13 +4,13 @@
 			:data="tableDateArr"
 			style="width: 100%">
 			<el-table-column
-				prop="username"
+				prop="nikeName"
 				label="用户名"
 				min-width="15%">
 			</el-table-column>
 			<el-table-column
 				align="center"
-				prop="bindingName"
+				prop="nikeName"
 				label="被核销姓名"
 				min-width="25%">
 			</el-table-column>
@@ -110,7 +110,7 @@ export default {
 
 			this.$http.post(this.$api.getVenueOrder, params).then(({data}) => {
 				if (data.code === 0) {
-					this.tableDateArr = data.data.list
+					this.tableDateArr = data.data.data
 					this.total = data.data.total
 				} else {
 					this.$message.error(data.msg)
