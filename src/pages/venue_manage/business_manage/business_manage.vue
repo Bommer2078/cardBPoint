@@ -1,12 +1,12 @@
 <template>
 	<div class="business-manage">
-		<table-header :current-obj="currentObj"></table-header>
+		<table-header ></table-header>
 		<div class="line"></div>
 		<div class="business-container">
-			<div v-for="item in businessArr" :key="item.id" @click="changeBusiness(item.id)">
+			<div v-for="item in businessArr" :key="item.id" @click="changeBusiness(item.user_id)">
 				<business-card
 					:business-obj="item"
-					:class="{'active':current === item.id}"></business-card>
+					:class="{'active':current === item.user_id}"></business-card>
 			</div>
 		</div>
 		<div class="list-container" v-if="currentObj">
@@ -47,23 +47,23 @@ export default {
 		}
 	},
 	methods: {
-		changeBusiness (username) {
+		changeBusiness (userID) {
 			let path = this.$route.path
 
 			this.$router.replace({
 				path,
 				query: {
 					...this.$route.query,
-					businessName: username
+					businessName: userID
 				}
 			}, () => {}, (e) => {})
-			this.current = username
+			this.current = userID
 			this.currentObj = this.businessArr.find((item) => {
-				return item.id === this.current
+				return item.user_id === this.current
 			})
 		},
 		getBusinessList () {
-			let username = this.$route.query.businessName
+			let userID = this.$route.query.businessName
 			let params = {
 				page    : this.pageNum,
 				pageSize: this.pageSize,
@@ -76,8 +76,8 @@ export default {
 						let data = res.data.data
 
 						this.businessArr = data.data
-						if (username) {
-							this.changeBusiness(username)
+						if (userID) {
+							this.changeBusiness(userID)
 						}
 					}
 				})

@@ -4,38 +4,47 @@
 			:data="tableDateArr"
 			style="width: 100%">
 			<el-table-column
-				prop="nikeName"
-				label="用户名"
+				prop="avatar"
+				label="头像"
+				min-width="15%">
+				<template slot-scope="scope">
+					<img :src="scope.row.avatar" class="avatar">
+				</template>
+			</el-table-column>
+			<el-table-column
+				align="center"
+				prop="nickname"
+				label="用户昵称"
 				min-width="15%">
 			</el-table-column>
 			<el-table-column
 				align="center"
-				prop="nikeName"
-				label="被核销姓名"
-				min-width="25%">
+				prop="card.name"
+				label="使用的权益卡"
+				min-width="15%">
 			</el-table-column>
 			<el-table-column
 				align="center"
-				prop="childCode"
-				label="权益卡编号"
-				min-width="25%">
+				prop="paid_date"
+				label="下单时间"
+				min-width="15%">
 			</el-table-column>
 			<el-table-column
 				align="center"
-				prop="times"
-				label="核销时间"
-				min-width="25%">
+				prop="price"
+				label="下单价格"
+				min-width="15%">
 				<template slot-scope="scope">
-					<span>{{$utils.dateText(scope.row.createTime)}}</span>
+					<span>{{scope.row.price / 100}}</span>
 				</template>
 			</el-table-column>
 			<el-table-column
 				align="center"
 				prop="times"
 				label="支付状态"
-				width="50">
+				width="150">
 				<template slot-scope="scope">
-					<span>{{$utils.dateText(scope.row.createTime)}}</span>
+					<span>{{scope.row.paid_state | payText}}</span>
 				</template>
 			</el-table-column>
 		</el-table>
@@ -55,6 +64,31 @@
 
 <script>
 export default {
+	filters: {
+		// paid_state：支付状态，-1：支付失败，0：未支付，1：预支付，10：已支付
+		payText (val) {
+			let text = ''
+
+			switch (val) {
+				case -1:
+					text = '支付失败'
+					break
+				case 0:
+					text = '未支付'
+					break
+				case 1:
+					text = '预支付'
+					break
+				case 10:
+					text = '已支付'
+					break
+				default:
+					text = '未支付'
+					break
+			}
+			return text
+		}
+	},
 	data () {
 		return {
 			tableDateArr : [],
@@ -141,6 +175,11 @@ export default {
 	.img-compressed {
 		width: 240px;
 		height: 130px;
+	}
+	.avatar {
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
 	}
 }
 </style>

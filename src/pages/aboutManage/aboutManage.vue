@@ -30,6 +30,7 @@ export default {
 	data () {
 		return {
 			rich_content: '',
+			content     : '',
 			ueConfig    : config.litteConfig,
 			version     : ''
 		}
@@ -38,7 +39,7 @@ export default {
 		tButton
 	},
 	created () {
-		// this.initAbout()
+		this.initAbout()
 	},
 	watch: {
 		rich_content (nval) {
@@ -59,22 +60,10 @@ export default {
 			})
 		},
 		initAbout () {
-			let params = {
-				type: 'about'
-			}
-
-			this.$http.get(this.$api.notice, {params}).then((res) => {
-				if (res.data.code === '0') {
-					if (!res.data.data[0]) return
-					let id = res.data.data[0].id
-
-					this.$http.get(`${this.$api.noticeDetail}/${id}`).then((ele) => {
-						if (ele.data.code === '0') {
-							this.version = ele.data.data.version
-							this.rich_content = ele.data.data.content
-							this.id = ele.data.data.id
-						}
-					})
+			this.$http.get(this.$api.notice).then((res) => {
+				if (res.data.code === 0) {
+					this.rich_content = res.data.data.content
+					this.version = res.data.data.version
 				}
 			})
 		},

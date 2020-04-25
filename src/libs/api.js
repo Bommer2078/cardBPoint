@@ -47,7 +47,7 @@ const api = {
 	getOrderList   : `${val}/order/list`,	// 根据条件分页查找订单
 	deleRecode     : `${val}/verify`,	// 根据条件分页查找订单
 	ship           : `${val}/order/ship`,
-	notice         : `${val}/notice/list`,
+	notice         : `${val}/config/details`,
 	noticeDetail   : `${val}/config/save`,
 	bindTicket     : `${val}/ticket/bandingNameAndPhoto`,
 	getBookList    : `${val}/booking/listByVenueId`,

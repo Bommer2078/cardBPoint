@@ -48,12 +48,6 @@ export default {
 		tButton,
 		searchGroup
 	},
-	props: {
-		currentObj: {
-			type   : Object,
-			default: null
-		}
-	},
 	data () {
 		return {
 			tableDateArr  : [],

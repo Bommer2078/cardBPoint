@@ -40,8 +40,8 @@
 				prop="status"
 				label="会员状态"
 				min-width="15%">
-				<template>
-					<span>非会员</span>
+				<template slot-scope="scope">
+					<span>{{ scope.row.is_vip | vipText}}</span>
 				</template>
 			</el-table-column>
 			<el-table-column
@@ -98,6 +98,24 @@ export default {
 			let temp = val === 1 ? '已冻结' : '正常'
 
 			return temp
+		},
+		vipText (val) {
+			let text = '非会员'
+
+			switch (val) {
+				case -1:
+					text = '会员过期'
+					break
+				case 0:
+					text = '非会员'
+					break
+				case 1:
+					text = '正式会员'
+					break
+				default:
+					break
+			}
+			return text
 		}
 	},
 	created () {
