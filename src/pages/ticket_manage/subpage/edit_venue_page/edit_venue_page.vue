@@ -26,7 +26,6 @@ export default {
 	},
 	methods: {
 		getVenueArr (val) {
-			console.log('valvalval', val)
 			if (val) {
 				val.forEach((item) => {
 					this.venueArr.push({

@@ -36,7 +36,7 @@ export const litteConfig = {
 	initialFrameWidth : 640,
 	initialFrameHeight: 320,
 	autoHeightEnabled : false,
-	serverUrl         : 'http://hugo.lingqi100.cn/api/ueditor/config',
+	serverUrl         : 'http://hugo.lingqi100.cn/upload',
 	UEDITOR_HOME_URL  : '/static/UEditor/'
 }
 /*  */

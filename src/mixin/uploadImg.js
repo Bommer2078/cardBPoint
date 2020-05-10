@@ -56,7 +56,6 @@ const upload = {
 						reject(new Error('errorMsg'))
 					},
 					(progress) => {
-						console.log(progress)
 					},
 					imgFile,
 					fileName

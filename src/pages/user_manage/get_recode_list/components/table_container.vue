@@ -105,7 +105,6 @@ export default {
 	methods: {
 		changeCover (e, item) {
 			this.uploadImg(e).then((res) => {
-				console.log('res', res)
 			})
 		},
 		bindTicket (item, url) {
@@ -153,7 +152,6 @@ export default {
 			this.$http.post(this.$api.getRecodeList, params).then(({data}) => {
 				if (data.code === 0) {
 					this.tableDateArr = data.data.data
-					console.log(this.tableDateArr)
 					this.total = data.data.total
 				} else {
 					this.$message.error(data.msg)

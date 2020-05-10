@@ -37,7 +37,6 @@ export default {
 				return this.imgList
 			},
 			set (val) {
-				console.log(val)
 				this.$emit('update:imgList', val)
 			}
 		}

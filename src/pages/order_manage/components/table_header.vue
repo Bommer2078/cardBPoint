@@ -1,6 +1,14 @@
 <template>
 	<div class="table-header">
 		<div class="left-part">
+			<el-select v-model="selected" placeholder="选择订单类型" @change="changeSelected">
+				<template v-for="item in selectArr" >
+					<el-option
+						:key="item.id"
+						:label="item.type"
+						:value="item.id"></el-option>
+				</template>
+			</el-select>
 			<search-group ref="searchGroup" placeholder="请输入下单用户名"></search-group>
 		</div>
 	</div>
@@ -16,13 +24,21 @@ export default {
 	},
 	data () {
 		return {
+			selected : 0,
+			selectArr: [ {
+				type: '购买场馆',
+				id  : 0
+			}, {
+				type: '购买权益卡',
+				id  : 1
+			} ]
 		}
 	},
-	created () {
-	},
-	destroyed () {
-	},
 	methods: {
+		changeSelected () {
+			this.$refs.searchGroup.searchContent = ''
+			this.$EventBus.$emit('changeType', this.selected)
+		}
 	}
 }
 </script>

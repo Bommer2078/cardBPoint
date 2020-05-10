@@ -6,41 +6,57 @@
 			<el-table-column
 				prop="transaction_id"
 				label="订单编号"
-				min-width="20%">
-			</el-table-column>
-			<el-table-column
-				prop="itemName"
-				label="商品名称"
-				min-width="20%">
-			</el-table-column>
-			<el-table-column
-				align="center"
-				prop="times"
-				label="下单时间"
-				min-width="20%">
+				min-width="16%">
 				<template slot-scope="scope">
-					{{$utils.dateText(scope.row.createTime)}}
+					<div class="transaction-id" :title="scope.row.transaction_id">{{ scope.row.transaction_id }}</div>
 				</template>
 			</el-table-column>
 			<el-table-column
 				align="center"
 				prop="username"
 				label="用户"
-				min-width="20%">
+				min-width="16%">
+			</el-table-column>
+			<el-table-column
+				v-if="orderType === 0"
+				align="center"
+				label="场馆名称"
+				min-width="16%">
+				<template slot-scope="scope">
+					<div>{{ scope.row.venue && scope.row.venue.name }}</div>
+				</template>
+			</el-table-column>
+			<el-table-column
+				v-else
+				align="center"
+				label="权益卡名称和规格"
+				min-width="16%">
+				<template slot-scope="scope">
+					<span>{{scope.row.card && scope.row.card.name}}/{{scope.row.card_sku && scope.row.card_sku.name}}</span>
+				</template>
+			</el-table-column>
+			<el-table-column
+				align="center"
+				prop="create_at"
+				label="下单时间"
+				min-width="16%">
+			</el-table-column>
+			<el-table-column
+				align="center"
+				prop="price"
+				label="支付价格"
+				min-width="16%">
+				<template slot-scope="scope">
+					<div>{{ scope.row.price / 100 }}元</div>
+				</template>
 			</el-table-column>
 			<el-table-column
 				align="center"
 				prop="count"
-				label="数量"
-				min-width="20%">
-			</el-table-column>
-			<el-table-column
-				align="center"
-				prop="type"
-				label="商品类型"
-				min-width="20%">
+				label="支付状态"
+				min-width="16%">
 				<template slot-scope="scope">
-					<span>{{scope.row.itemType | typeText }}</span>
+					<div>{{ scope.row.paid_state | payText }}</div>
 				</template>
 			</el-table-column>
 		</el-table>
@@ -66,29 +82,57 @@ export default {
 			tableDateArr : [],
 			total        : 0,
 			pageIndex    : 1,
-			pageSize     : 10,
+			pageSize     : 15,
 			forbidClick  : false,
-			searchContent: ''
+			searchContent: '',
+			orderType    : 0 // （0：购买场馆，1：购买权益卡）
 		}
 	},
 	components: {
 		tButton
 	},
 	filters: {
-		typeText (val) {
-			let arr = [ '权益卡', '门票' ]
+		// paid_state：支付状态，-1：支付失败，0：未支付，1：预支付，10：已支付
+		payText (val) {
+			let text = ''
 
-			return arr[val - 1]
+			switch (val) {
+				case -1:
+					text = '支付失败'
+					break
+				case 0:
+					text = '未支付'
+					break
+				case 1:
+					text = '预支付'
+					break
+				case 10:
+					text = '已支付'
+					break
+				default:
+					text = '未支付'
+					break
+			}
+			return text
 		}
 	},
 	created () {
 		this.getOrderList()
-		this.$EventBus.$on('search', this.handleSearch)
+		this.$nextTick(() => {
+			this.$EventBus.$on('search', this.handleSearch)
+			this.$EventBus.$on('changeType', this.changeType)
+		})
 	},
 	destroyed () {
 		this.$EventBus.$off('search')
 	},
 	methods: {
+		changeType (val) {
+			this.pageIndex = 0
+			this.searchContent = ''
+			this.orderType = val
+			this.getOrderList()
+		},
 		handleSearch (val) {
 			this.searchContent = val
 			this.pageIndex = 1
@@ -100,9 +144,10 @@ export default {
 		},
 		getOrderList () {
 			const params = {
-				pageNum : this.pageIndex,
+				page    : this.pageIndex,
 				pageSize: this.pageSize,
-				username: this.searchContent
+				username: this.searchContent,
+				type    : this.orderType
 			}
 
 			this.$http.get(this.$api.getOrderList, {params}).then(({data}) => {
@@ -120,7 +165,12 @@ export default {
 
 <style lang="less" scoped>
 .table-container {
-    padding: 20px;
+	padding: 20px;
+	.transaction-id {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 	.setting-input {
 		width: 240px;
 		height: 36px;

@@ -127,9 +127,7 @@ export default {
 				...this.typeArr[index]
 			}
 
-			console.log(1, this.typeArr[index])
 			this.typeArr.splice(index, 1, obj)
-			console.log(2, this.typeArr[index])
 		},
 		checkTypeDel (obj) {
 			if (this.forbidClickFn()) return

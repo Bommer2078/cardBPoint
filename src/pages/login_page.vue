@@ -48,7 +48,7 @@ export default {
 						this.$message('登录成功')
 						this.$router.push('/')
 					} else {
-						this.$message.error(res.data.message)
+						this.$message.error(res.data.msg)
 					}
 				}
 			).finally(() => {
