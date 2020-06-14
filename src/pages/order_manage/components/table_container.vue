@@ -13,7 +13,7 @@
 			</el-table-column>
 			<el-table-column
 				align="center"
-				prop="username"
+				prop="nickname"
 				label="用户"
 				min-width="16%">
 			</el-table-column>
@@ -146,7 +146,7 @@ export default {
 			const params = {
 				page    : this.pageIndex,
 				pageSize: this.pageSize,
-				username: this.searchContent,
+				nickname: this.searchContent,
 				type    : this.orderType
 			}
 
