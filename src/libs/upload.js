@@ -17,7 +17,7 @@ let cos = new CosCloud({
 		// 1.搭建一个鉴权服务器，自己构造请求参数获取签名，推荐实际线上业务使用，优点是安全性好，不会暴露自己的私钥
 		// 拿到签名之后记得调用callback
 		ajax.Http({
-			url         : '/api/cos/get_cos_token',
+			url         : '/cos/get_cos_token',
 			responseType: 'json'
 		}).then(
 			function (res) {
@@ -33,7 +33,7 @@ let cos = new CosCloud({
 	getAppSignOnce: function (callback) { // 单次签名，必填参数，参考上面的注释即可
 		//    //填上获取单次签名的逻辑
 		ajax.Http({
-			url: '/api/cos/get_cos_token'
+			url: '/cos/get_cos_token'
 		}).then(
 			function (res) {
 				var sig = res.body.data.credentials.sessionToken
