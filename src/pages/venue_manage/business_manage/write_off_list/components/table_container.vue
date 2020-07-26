@@ -25,7 +25,7 @@
 			</el-table-column>
 			<el-table-column
 				align="center"
-				prop="paid_date"
+				prop="create_at"
 				label="下单时间"
 				min-width="15%">
 			</el-table-column>
