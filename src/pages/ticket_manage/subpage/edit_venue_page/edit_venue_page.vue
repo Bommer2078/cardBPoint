@@ -29,7 +29,7 @@ export default {
 			if (val) {
 				val.forEach((item) => {
 					this.venueArr.push({
-						editPrice: item.price / 100,
+						editPrice: item.price > 0 ? item.price / 100 : 0,
 						venue_id : item.venue_id,
 						text     : item.name
 					})

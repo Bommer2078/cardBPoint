@@ -60,7 +60,7 @@ export default {
 		initEditObj () {
 			this.$nextTick(() => {
 				this.editVenue = JSON.parse(JSON.stringify(this.venueObj))
-				if (this.editVenue.editPrice) {
+				if (this.editVenue.editPrice || this.editVenue.editPrice === 0) {
 					this.editPrice = this.editVenue.editPrice || 0
 				}
 			})
