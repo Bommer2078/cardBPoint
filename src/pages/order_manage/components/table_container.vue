@@ -37,6 +37,14 @@
 			</el-table-column>
 			<el-table-column
 				align="center"
+				label="场馆来源"
+				min-width="16%">
+				<template slot-scope="scope">
+					<div>{{ scope.row.venue && scope.row.venue.name || '--'}}</div>
+				</template>
+			</el-table-column>
+			<el-table-column
+				align="center"
 				prop="create_at"
 				label="下单时间"
 				min-width="16%">
@@ -146,7 +154,7 @@ export default {
 			const params = {
 				page    : this.pageIndex,
 				pageSize: this.pageSize,
-				nickname: this.searchContent,
+				venue_id: this.searchContent,
 				type    : this.orderType
 			}
 

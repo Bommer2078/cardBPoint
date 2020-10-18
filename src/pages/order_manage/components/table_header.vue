@@ -9,7 +9,8 @@
 						:value="item.id"></el-option>
 				</template>
 			</el-select>
-			<search-group ref="searchGroup" placeholder="请输入下单用户名"></search-group>
+			<search-group ref="searchGroup" placeholder="请输入场馆id"></search-group>
+			<!-- <search-group ref="searchGroup" placeholder="请输入下单用户名"></search-group> -->
 		</div>
 	</div>
 </template>

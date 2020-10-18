@@ -20,6 +20,9 @@ const api = {
 	venueUserList   : `${val}/venue/user/list`, // 场馆商户
 	venueSaveUser   : `${val}/venue/user/save`, // 新增商户
 	getVenueOrder   : `${val}/order/admin_list`, // 商户统计
+	saveQrcode      : `${val}/card/qrcode/save`, // 设置分销二维码
+	getQrcodeList   : `${val}/card/qrcode/list`, // 获取分销二维码列表
+	getQrcode       : `${val}/config/get_qr_code`, // 获取分销二维码
 
 	// 普通用户
 	getCommenUserList: `${val}/user/list`,

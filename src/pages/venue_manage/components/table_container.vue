@@ -51,6 +51,8 @@
 					<span class="split" v-if="scope.row.booking">|</span>
 					<span type="text" class="setting-btn" @click="intoBusinessList(scope)">商户列表</span>
 					<span class="split">|</span>
+					<span type="text" class="setting-btn" @click="handleDistribute(scope.row)">配置分销</span>
+					<span class="split">|</span>
 					<span type="text" class="setting-btn" @click="handleEdit(scope)">编辑</span>
 					<span class="split">|</span>
 					<span type="text" class="setting-btn" @click="checkDel(scope)">删除</span>
@@ -68,20 +70,27 @@
 			:page-size="pageSize"
 			:total="total">
 		</el-pagination>
+		<distribute-box :showDistributeBox.sync="showDistributeBox" :currentSetVenue="currentSetVenue"></distribute-box>
 	</div>
 </template>
 
 <script>
+import distributeBox from '../../../components/distributeBox'
 export default {
+	components: {
+		distributeBox
+	},
 	data () {
 		return {
-			tableDateArr : [],
-			total        : 0,
-			pageIndex    : 1,
-			pageSize     : 10,
-			forbidClick  : false,
-			searchContent: '',
-			location     : ''
+			tableDateArr     : [],
+			total            : 0,
+			pageIndex        : 1,
+			pageSize         : 10,
+			forbidClick      : false,
+			searchContent    : '',
+			location         : '',
+			showDistributeBox: false,
+			currentSetVenue  : null
 		}
 	},
 	created () {
@@ -133,6 +142,13 @@ export default {
 		},
 		handleEdit (obj) {
 			this.$EventBus.$emit('editVenue', obj)
+		},
+		handleDistribute (obj) {
+			this.currentSetVenue = null
+			this.$nextTick(() => {
+				this.currentSetVenue = obj
+				this.showDistributeBox = true
+			})
 		},
 		checkDel (obj) {
 			this.$alert('删除后无法恢复，确认删除该场馆？', '删除场馆', {
